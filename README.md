@@ -1,4 +1,1 @@
-## Proje Tanıtım Videosu
-
-![Proje Tanıtım Videosu](img/Documan.gif)
-
+[YouTube'da İzleyin](https://www.youtube.com/watch?v=OZBnA8jWapU)
