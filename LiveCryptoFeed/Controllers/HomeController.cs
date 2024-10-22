@@ -1,3 +1,4 @@
+using Binance.Net.Clients;
 using LiveCryptoFeed.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -6,10 +7,12 @@ namespace LiveCryptoFeed.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BinanceSocketClient _binanceSocketClient;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,BinanceSocketClient binanceSocketClient)
         {
+            _binanceSocketClient = binanceSocketClient;
             _logger = logger;
         }
 

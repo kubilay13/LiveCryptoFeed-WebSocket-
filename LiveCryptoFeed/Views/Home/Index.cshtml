@@ -1,30 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@{
-    ViewData["Title"] = "Coin Exchange";
-}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.6/signalr.min.js"></script>
 <script src="~/js/site.js"></script>
-<h1>@ViewData["Title"]</h1>
 <div style="display: flex; justify-content: center; gap: 30px; padding: 20px;">
     <div style="border-radius: 10px; width: 20vw; background: white; box-shadow: 0 3px 6px white; padding: 15px; text-align: center; background-color:#1A1F26; border:solid 1px white;">
         <img src="/img/Btc.png" alt="BTCUSDT" style="width: 60px; margin-bottom: 10px;">
         <h2 style="font-size: 1.5rem; margin: 10px 0;">BTCUSDT</h2>
-        <p id="BTCUSDT" style="font-size: 1.2rem; color: #4caf50;">Price: USDT</p>
-        <p style="color: #4caf50;">24 HOURS:</p>
+        <p id="BTCUSDT" style="font-size: 1.2rem; color: #4caf50;">Price:</p>
+        @*<p style="color: #4caf50;">24 HOURS:</p> *@
     </div>
     <div style="border-radius: 10px; width: 20vw; background: white; box-shadow: 0 3px 6px white; padding: 15px; text-align: center; background-color:#1A1F26; border:solid 1px white;">
         <img src="/img/Eth.png" alt="ETHUSDT" style="width: 60px; margin-bottom: 10px;">
         <h2 style="font-size: 1.5rem; margin: 10px 0;">ETHUSDT</h2>
         <p id="ETHUSDT" style="font-size: 1.2rem; color: #4caf50;">Price: USDT</p>
-        <p style="color: #4caf50;">24 HOURS:</p>
+        @*<p style="color: #4caf50;">24 HOURS:</p> *@
     </div>
     <div style="border-radius: 10px; width: 20vw; background: white; box-shadow: 0 3px 6px white; padding: 15px; text-align: center; background-color:#1A1F26; border:solid 1px white;">
         <img src="/img/Bnb.png" alt="BNBUSDT" style="width: 60px; margin-bottom: 10px;">
         <h2 style="font-size: 1.5rem; margin: 10px 0;">BNBUSDT</h2>
         <p id="BNBUSDT" style="font-size: 1.2rem; color: #4caf50;">Price: USDT</p>
-        <p style="color: #4caf50;">24 HOURS:</p>
+        @*<p style="color: #4caf50;">24 HOURS:</p> *@
     </div>
 </div>
 <div style="width:none; height:none;">
@@ -42,7 +38,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Litecoin.png" alt="LİTEUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">LTC</p>
             <p id="LTCUSDT" style="margin-top:7px; font-weight:bold; margin:5px;color: #4caf50; font-size:1vw;  ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+           @*  <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -50,7 +46,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Arbitrum.png" alt="ARBUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">ARB</p>
             <p id="ARBUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+      @*       <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -58,7 +54,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Trx.png" alt="TRXUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">TRX</p>
             <p id="TRXUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+            @* <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -66,7 +62,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Sol.png" alt="SOLUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">SOL</p>
             <p id="SOLUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price:USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+            @* <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -74,7 +70,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Xrp.png" alt="XRPUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">XRP</p>
             <p id="XRPUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+            @* <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -82,7 +78,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Doge.png" alt="DogeUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">DOGE</p>
             <p id="DOGEUSDT" style="margin-top:7px; font-weight:bold; margin:5px;color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+        @*     <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -90,7 +86,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Ton.png" alt="TONUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">TON</p>
             <p id="TONUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+          @*   <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -98,7 +94,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Pepe.webp" alt="PEPEUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">PEPE</p>
             <p id="PEPEUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw; ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+            @* <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
     <div style="width:none; border: 1px solid white; height: auto; padding:1px;">
@@ -106,7 +102,7 @@
             <img style="width:25px; max-width:10%; height:auto; margin:5px;" src="/img/Bch.png" alt="BCHUSDT" />
             <p style="margin-top:7px; font-weight:bold; margin:5px; font-size:1vw;">BCH</p>
             <p id="BCHUSDT" style="margin-top:7px; font-weight:bold; margin:5px; color: #4caf50; font-size:1vw;   ">Price: USDT</p>
-            <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p>
+            @* <p style="margin-top:7px; font-weight:bold; margin:5px; color:limegreen; font-size:1vw;">24HOURS:</p> *@
         </div>
     </div>
 </div>
