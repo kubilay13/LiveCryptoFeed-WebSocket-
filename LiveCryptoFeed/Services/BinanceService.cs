@@ -8,6 +8,7 @@ namespace LiveCryptoFeed.Services
     {
         private readonly BinanceSocketClient _binanceSocketClient;
         private readonly IHubContext<PriceUpdateHub> _hubContext;
+        private Dictionary<string, decimal> _previousPrices = new Dictionary<string, decimal>();
 
         public event Action<decimal> OnBtcPriceUpdated;
         public event Action<decimal> OnEthPriceUpdated;
@@ -53,7 +54,18 @@ namespace LiveCryptoFeed.Services
             {
                 var lastPrice = update.Data.LastPrice;
                 InvokeEvent(symbol, lastPrice);
+
+                if (_previousPrices.ContainsKey(symbol))
+                {
+                    var previousPrice = _previousPrices[symbol];
+                    var color = lastPrice > previousPrice ? "green" : "red";
+
+                    _hubContext.Clients.All.SendAsync("ReceivePriceUpdate", symbol, lastPrice, color);
+                }
+                _previousPrices[symbol] = lastPrice;
+                InvokeEvent(symbol, lastPrice);
             });
+
 
             if (result.Success)
             {
