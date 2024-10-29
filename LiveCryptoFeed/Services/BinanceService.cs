@@ -7,8 +7,10 @@ namespace LiveCryptoFeed.Services
     public class BinanceService
     {
         private readonly BinanceSocketClient _binanceSocketClient;
+        private readonly BinanceRestClient _binanceRestClient;
         private readonly IHubContext<PriceUpdateHub> _hubContext;
         private Dictionary<string, decimal> _previousPrices = new Dictionary<string, decimal>();
+        private Dictionary<string, decimal> _previous24hPrices = new Dictionary<string, decimal>();
 
         public event Action<decimal> OnBtcPriceUpdated;
         public event Action<decimal> OnEthPriceUpdated;
@@ -26,10 +28,11 @@ namespace LiveCryptoFeed.Services
         public event Action<decimal> OnXautPriceUpdated;
         public event Action<decimal> OnUsdcPriceUpdated;
 
-        public BinanceService(BinanceSocketClient binanceSocketClient, IHubContext<PriceUpdateHub> hubContext)
+        public BinanceService(BinanceSocketClient binanceSocketClient, IHubContext<PriceUpdateHub> hubContext, BinanceRestClient binanceRestClient)
         {
             _binanceSocketClient = binanceSocketClient;
             _hubContext = hubContext;
+            _binanceRestClient = binanceRestClient;
         }
 
         private List<string> _allCoins = new List<string>
@@ -44,6 +47,18 @@ namespace LiveCryptoFeed.Services
         {
             foreach (var coin in _allCoins)
             {
+                var ticker24hResult = await _binanceRestClient.SpotApi.ExchangeData.GetTickerAsync(coin);
+                if (ticker24hResult.Success)
+                {
+                    _previous24hPrices[coin] = ticker24hResult.Data.OpenPrice; 
+                }
+
+                var tickerResult = await _binanceRestClient.SpotApi.ExchangeData.GetTickerAsync(coin);
+                if (tickerResult.Success)
+                {
+                    var initialPriceChangePercent = tickerResult.Data.PriceChangePercent;
+                    _hubContext.Clients.All.SendAsync("InitialPriceChange", coin, initialPriceChangePercent);
+                }
                 await SubscribeToTickerUpdates(coin);
             }
         }
@@ -60,12 +75,14 @@ namespace LiveCryptoFeed.Services
                     var previousPrice = _previousPrices[symbol];
                     var color = lastPrice > previousPrice ? "green" : "red";
 
-                    _hubContext.Clients.All.SendAsync("ReceivePriceUpdate", symbol, lastPrice, color);
+                    var previous24hPrice = _previous24hPrices[symbol];
+                    var priceChangePercentage = ((lastPrice - previous24hPrice) / previous24hPrice) * 100;
+
+                    _hubContext.Clients.All.SendAsync("ReceivePriceUpdate", symbol, lastPrice, color, priceChangePercentage);
                 }
                 _previousPrices[symbol] = lastPrice;
                 InvokeEvent(symbol, lastPrice);
             });
-
 
             if (result.Success)
             {

@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<BinanceService>();
 builder.Services.AddSingleton<BinanceSocketClient>();
+builder.Services.AddSingleton<BinanceRestClient>();
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();

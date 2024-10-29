@@ -3,11 +3,12 @@ const priceUpdateConnection = new signalR.HubConnectionBuilder()
     .withUrl("https://localhost:7236/priceUpdateHub") // Hub'ın URL'si
     .build();
 
-// Fiyatların en son değerlerini saklamak için bir nesne oluşturun
+// Fiyatların en son ve 24 saat önceki değerlerini saklamak için nesneler oluşturun
 const lastPrices = {};
+const last24hPrices = {};
 
 // Bağlantı kurulduğunda fiyat güncellemelerini dinleyin
-priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price) {
+priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price, color, priceChangePercentage) {
     console.log(`Güncellenen Fiyat: ${symbol} - ${price}`);
 
     // Her coinin kendi elementi ile güncelleme
@@ -18,20 +19,29 @@ priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price) {
         // Önceki fiyatı kontrol edin
         const lastPrice = lastPrices[symbol];
 
-        // Renk değiştirme koşulu
-        if (lastPrice !== undefined) {
-            if (price > lastPrice) {
-                priceElement.style.color = "#4caf50"; // Yeşil (yükselme)
-            } else if (price < lastPrice) {
-                priceElement.style.color = "#f44336"; // Kırmızı (düşüş)
-            }
+        // Eğer 24 saat önceki fiyat yoksa mevcut fiyatı kaydedin
+        if (!last24hPrices[symbol]) {
+            last24hPrices[symbol] = price; // 24 saat önceki fiyatı kaydedin
         }
+
+        // Renk değiştirme koşulu (renk parametresini kullanın)
+        priceElement.style.color = color; // Renk güncellemesi
 
         // Fiyatı güncelle
         priceElement.innerText = `Price: ${price}`;
 
         // Son fiyatı kaydet
         lastPrices[symbol] = price;
+
+        // Yüzde değişimi hesapla ve göster
+        const percentageElement = document.getElementById(`${symbol}-percentage`);
+        if (percentageElement) {
+            // 24 saatlik değişimi göster
+            percentageElement.innerText = ` ${priceChangePercentage.toFixed(2)}%`;
+
+            // Yüzde değişimine göre renk ayarla
+            percentageElement.style.color = priceChangePercentage < 0 ? 'red' : 'green'; // Negatif değişim kırmızı, pozitif yeşil
+        }
     }
 });
 
