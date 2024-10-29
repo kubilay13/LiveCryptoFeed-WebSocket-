@@ -7,11 +7,11 @@ const priceUpdateConnection = new signalR.HubConnectionBuilder()
 const lastPrices = {};
 
 // Bağlantı kurulduğunda fiyat güncellemelerini dinleyin
-connection.on("ReceivePriceUpdate", function (symbol, price) {
+priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price) {
     console.log(`Güncellenen Fiyat: ${symbol} - ${price}`);
 
     // Her coinin kendi elementi ile güncelleme
-    let elementId = symbol; 
+    let elementId = symbol;
     const priceElement = document.getElementById(elementId);
 
     if (priceElement) {
@@ -36,6 +36,6 @@ connection.on("ReceivePriceUpdate", function (symbol, price) {
 });
 
 // Bağlantıyı başlat
-connection.start().catch(function (err) {
+priceUpdateConnection.start().catch(function (err) {
     return console.error(err.toString());
 });
