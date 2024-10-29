@@ -27,8 +27,10 @@ priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price, color, p
         // Renk değiştirme koşulu (renk parametresini kullanın)
         priceElement.style.color = color; // Renk güncellemesi
 
-        // Fiyatı güncelle
+      
         priceElement.innerText = `Price: ${price}`;
+        // Fiyatı güncelle
+        
 
         // Son fiyatı kaydet
         lastPrices[symbol] = price;
@@ -37,10 +39,19 @@ priceUpdateConnection.on("ReceivePriceUpdate", function (symbol, price, color, p
         const percentageElement = document.getElementById(`${symbol}-percentage`);
         if (percentageElement) {
             // 24 saatlik değişimi göster
-            percentageElement.innerText = ` ${priceChangePercentage.toFixed(2)}%`;
+            percentageElement.innerText = `24 HOURS: ${priceChangePercentage.toFixed(2)}% `;
 
             // Yüzde değişimine göre renk ayarla
             percentageElement.style.color = priceChangePercentage < 0 ? 'red' : 'green'; // Negatif değişim kırmızı, pozitif yeşil
+
+            // Borsa ok simgelerini ekle
+            if (priceChangePercentage > 0) {
+                percentageElement.innerHTML += ' <i class="fas fa-caret-up"></i>'; // Yukarı ok simgesi
+            } else if (priceChangePercentage < 0) {
+                percentageElement.innerHTML += ' <i class="fas fa-caret-down"></i>'; // Aşağı ok simgesi
+            } else {
+                percentageElement.innerHTML += ''; // Hiçbir değişim yoksa boş bırak
+            }
         }
     }
 });
